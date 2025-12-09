@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
+    depends_on:
+      - rabbitmq
+
+  config-server:
+    build: ./configserver
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka-server
+
+  emailservice:
+    build: ./emailservice
+    container_name: emailservice
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_DATA_MONGODB_HOST=mongodb
+    depends_on:
+      - rabbitmq
+      - mongodb
+      - config-server
+
+  bookingservice:
+    build: ./bookingservice
+    container_name: bookingservice
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_DATA_MONGODB_HOST=mongodb
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=true
+      - EUREKA_CLIENT_FETCH_REGISTRY=true
+    depends_on:
+      - emailservice
+      - config-server
+      - mongodb
+
+  flightservice:
+    build: ./flightservice
+    container_name: flightservice
+    ports:
+      - "8081:8081"
+    depends_on:
+      - config-server
+      - eureka-server
+
+  apigateway:
+    build: ./Apigateway
+    container_name: apigateway
+    ports:
+      - "8085:8085"
+    depends_on:
+      - config-server
+      - eureka-server
+      - flightservice

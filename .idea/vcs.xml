@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Apigateway" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/bookingservice" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/emailservice" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/eureka-server" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/flightservice" vcs="Git" />
+  </component>
+</project>
