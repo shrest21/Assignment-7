@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: apigateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: flightservice
+          uri: lb://FLIGHTSERVICE
+          predicates:
+            - Path=/flights/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_UNIQUE
+
+        - id: bookingservice
+          uri: lb://BOOKINGSERVICE
+          predicates:
+            - Path=/booking/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_UNIQUE
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
