@@ -69,6 +69,8 @@ services:
     container_name: flightservice
     ports:
       - "8081:8081"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
       - config-server
       - eureka-server
@@ -78,6 +80,8 @@ services:
     container_name: apigateway
     ports:
       - "8085:8085"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
       - config-server
       - eureka-server
