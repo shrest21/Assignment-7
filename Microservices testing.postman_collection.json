@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "f783c746-b263-4317-b97d-d651a5bbb97e",
+		"name": "Microservices testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50312928",
+		"_collection_link": "https://shrest21-7444773.postman.co/workspace/Shrest's-Workspace~e0277f01-d3a7-4496-83e7-bec649e9bd5e/collection/50312928-f783c746-b263-4317-b97d-d651a5bbb97e?action=share&source=collection_link&creator=50312928"
+	},
+	"item": [
+		{
+			"name": "Get ALL Flights",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/flights",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"flights"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adding flights",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"airline\": \"Indigo\",\r\n  \"fromPlace\": \"Delhi\",\r\n  \"toPlace\": \"Mumbai\",\r\n  \"flightName\": \"6E-505\",\r\n  \"departureTime\": \"08:30\",\r\n  \"arrivalTime\": \"10:10\",\r\n  \"flightDate\": \"2025-12-05\",\r\n  \"totalSeats\": 120,\r\n  \"price\": 4500\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/flights",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"flights"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get flight by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/flights/692e183b4e59826131f99d6e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"flights",
+						"692e183b4e59826131f99d6e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search flights by from and to",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/flights/search?from=Delhi&to=Mumbai",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"flights",
+						"search"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "Delhi"
+						},
+						{
+							"key": "to",
+							"value": "Mumbai"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reserve Seats",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/flights/692e183b4e59826131f99d6e/reserve?seats=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"flights",
+						"692e183b4e59826131f99d6e",
+						"reserve"
+					],
+					"query": [
+						{
+							"key": "seats",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Release Seats",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/flights/692e183b4e59826131f99d6e/release?seats=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"flights",
+						"692e183b4e59826131f99d6e",
+						"release"
+					],
+					"query": [
+						{
+							"key": "seats",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Booking flight passenger list",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"flightId\": \"692e183b4e59826131f99d6e\",\r\n  \"name\": \"Shrest Gangatkar\",\r\n  \"email\": \"shrest21@gmail.com\",\r\n  \"mealType\": \"VEG\",\r\n  \"seats\": 2,\r\n  \"passengers\": [\r\n    {\r\n      \"name\": \"Shrest Gangatkar\",\r\n      \"age\": 21,\r\n      \"gender\": \"Male\"\r\n    },\r\n    {\r\n      \"name\": \"Rahul Sharma\",\r\n      \"age\": 22,\r\n      \"gender\": \"Male\"\r\n    }\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/booking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ticket by PNR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/booking/ticket/7JXPJVTD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"booking",
+						"ticket",
+						"7JXPJVTD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ticket by email id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/booking/history/shrest21@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"booking",
+						"history",
+						"shrest21@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get ALL Bookings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/booking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel booking",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/booking/cancel/7JXPJVTD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"booking",
+						"cancel",
+						"7JXPJVTD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ALL Flight Search API Gateway",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/flights",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"flights"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Flight search by id API GATEWAY",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/flights/692e5249a662c021cb131bbd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"flights",
+						"692e5249a662c021cb131bbd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Book ticket API GATEWAY",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"flightId\": \"692e183b4e59826131f99d6e\",\r\n  \"name\": \"Shrest Gangatkar\",\r\n  \"email\": \"shrest21@gmail.com\",\r\n  \"mealType\": \"VEG\",\r\n  \"seats\": 2,\r\n  \"passengers\": [\r\n    {\r\n      \"name\": \"Shrest Gangatkar\",\r\n      \"age\": 21,\r\n      \"gender\": \"Male\"\r\n    },\r\n    {\r\n      \"name\": \"Rahul Sharma\",\r\n      \"age\": 22,\r\n      \"gender\": \"Male\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/booking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete API GATEWAY",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/booking/cancel/4XHL1YUP",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"booking",
+						"cancel",
+						"4XHL1YUP"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup API GATEWAY",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"shrest\",\r\n  \"email\": \"shrest21@gmail.com\",\r\n  \"password\": \"checking\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin API GATEWAY",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"shrest\",\r\n  \"password\": \"checking\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8085/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signout API GATEWAY",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8085/api/auth/signout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"api",
+						"auth",
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
