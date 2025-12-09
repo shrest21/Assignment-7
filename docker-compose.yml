@@ -79,7 +79,7 @@ services:
     build: ./Apigateway
     container_name: apigateway
     ports:
-      - "8085:8085"
+      - "8085:8080"
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
